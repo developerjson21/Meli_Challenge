@@ -6,12 +6,26 @@ import (
 	"log"
 	"meli_golang_gin_basic_app/cmd/internal/middleware"
 	"os"
-
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/files"
 )
-
+// @title           API Scanner GitHub Repository
+// @version         1.0
+// @description     This is a sample server celler server.
+// @termsOfService  http://swagger.io/terms/
+// @contact.name   Stiven Mesa
+// @contact.url    http://www.swagger.io/support
+// @contact.email  developerjson21@gmail.com
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+// @host      localhost:8080
+// @BasePath  /api/v1
+// @securityDefinitions.basic  BasicAuth
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
 func main() {
 	Start()
 }
@@ -53,5 +67,5 @@ func Start() {
 	if err != nil {
 		panic("could not start app")
 	}
-	
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }

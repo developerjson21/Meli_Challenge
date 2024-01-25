@@ -18,7 +18,16 @@ func NewScanHandler(scanUsecase usecase.IScanUsecase) *Scan {
 		scanUsecase: scanUsecase,
 	}
 }
-
+// Scan
+// @Summary      scan of Repository
+// @Description  get jobId of scan process successfull
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  responsedto.ResponseBody
+// @Failure      400  {object}  errors.ErrorAPI
+// @Failure      404  {object}  errors.ErrorAPI
+// @Failure      500  {object}  errors.ErrorAPI
+// @Router       /scan [post]
 // FUNCION PARA REALIZAR ESCANEO DE ARCHIVOS EN UN REPOSITORIO GITHUB
 func (s *Scan) Scan(c *gin.Context)  {
 
@@ -46,7 +55,17 @@ func (s *Scan) Scan(c *gin.Context)  {
 	}
 	c.JSON(http.StatusOK, response)
 }
-
+// GetResult
+// @Summary      Busca registros por JobId
+// @Description  Obtiene los registros de escaneo por JobId
+// @Accept       json
+// @Produce      json
+// @Param        jobid  JobId del escaneo
+// @Success      200  {object}  responsedto.ResponseBody
+// @Failure      400  {object}  errors.ErrorAPI
+// @Failure      404  {object}  errors.ErrorAPI
+// @Failure      500  {object}  errors.ErrorAPI
+// @Router       /result/:job_id [get]
 //  FUNCION PARA TRAER LOS RESULTADOS PREVIOS DE UN ESCANEO 
 func (s *Scan) GetResult(c *gin.Context) {
 	jobId := c.Param("job_id")
